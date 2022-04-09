@@ -1,9 +1,8 @@
-const weatherApiKey = "64b3e96d4c6a9a51fe9aadbacbdc1c51"
 
 // Call the current weather API
 function getCurrentWeatherApi(city) {
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=64b3e96d4c6a9a51fe9aadbacbdc1c51`;
 
     return fetch(url).then(function (response) {
         return response.json();
