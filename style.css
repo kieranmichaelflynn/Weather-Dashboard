@@ -1,3 +1,50 @@
+:root{
+    --background-color: #d5ede7;
+    --darkGreen:rgb(12, 37, 17);
+    --gradient: linear-gradient(180deg, rgb(12, 37, 17),rgb(82, 141, 128),#d5ede7);
+}
 h1{
-    color: blue;
+    color:rgb(218, 228, 222);
+}
+.jumbotron{
+    background: var(--gradient);
+}
+.hide {
+    display: none;
+}
+body{
+    background-color: var(--background-color);
+    color: var(--darkGreen);
+}
+.card{
+    background-color: #accfbf;
+    color: rgb(44, 42, 37);
+}
+.btn-cursor{
+    cursor: crosshair;
+    background-color:var(--darkGreen);
+    border: var(--darkGreen);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.btn-cursor:hover{
+    cursor: crosshair;
+    background-color:#accfbf;
+    border: #accfbf;
+    color: var(--darkGreen);
+}
+.VW{
+    min-width:60vw;
+}
+.VWcard{
+    min-width: 12vw;
+    max-width: 12vw;
+    padding: 10px 10px 4px 4px;
+    justify-content: center;
+}
+.card-ul{
+    padding-left: 10px;
+    margin-left: 0px;
+    list-style-position: inside;
+    list-style: none;
 }
