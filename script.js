@@ -11,7 +11,7 @@ function getCurrentWeatherApi(city) {
 
 // Call onecall API
 function getOneCallApi(lon, lat) {
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${weatherApiKey}`
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=64b3e96d4c6a9a51fe9aadbacbdc1c51`
 
     return fetch(url).then(function (res) {
         return res.json();
