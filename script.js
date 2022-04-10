@@ -37,7 +37,6 @@ function kelvinToCelcius(kelvin) {
 }
 
 function iconCodeToPic(iconCode) {
-    console.log(iconCode)
     return `http://openweathermap.org/img/wn/${iconCode}@2x.png`
 }
 
@@ -48,6 +47,29 @@ function capitalizeFirstLetter(userInput) {
 function clearCard(todayWeatherCard) {
     return todayWeatherCard.innerHTML = " ";
 }
+
+const itemLocal = JSON.parse(localStorage.getItem('perth'));
+console.log(itemLocal);
+    
+// console.log(localItems)
+// const localObject = JSON.parse(localItems);
+// console.log(localObject);
+
+function printLocalStorageBtns() {
+    // const localTarget = document.querySelector('#local-target');
+
+    // for (let index = 0; index < localObject.length; index++) {
+    //     const localBtns = document.createElement('button').textContent(localItems);
+    //     localTarget.appendChild(localBtns);
+        
+    // };
+}
+function itemsToLocalStorage(weatherData, userInput) {
+    const localData = JSON.stringify(weatherData);
+    const localInput = JSON.stringify(userInput);
+    window.localStorage.setItem(localInput, localData);
+}
+
 
 
 searchForm.addEventListener('submit', function (event) {
@@ -71,22 +93,18 @@ searchForm.addEventListener('submit', function (event) {
             // Remove any existing information from card
             clearCard(todayWeatherCard);
 
-
             // Temperature
-
             const tempToday = kelvinToCelcius(weatherData.current.temp);
             const tempLi = document.createElement('li')
             tempLi.textContent = `Temperature is ${tempToday} ℃`
             todayWeatherCard.appendChild(tempLi)
 
-
-            // // Graphic
+            // Graphic
             const icon = iconCodeToPic(weatherData.current.weather[0].icon);
             document.getElementById("img-today-icon").src = icon;
 
             // Wind
             const wind = weatherData.current.wind_speed
-            console.log(wind)
             const windLi = document.createElement('li');
             windLi.textContent = `Wind Speed ${wind} km/h`
             todayWeatherCard.appendChild(windLi)
@@ -108,20 +126,6 @@ searchForm.addEventListener('submit', function (event) {
             }
             todayWeatherCard.appendChild(UVindexLi)
 
-
-
-
-            /*
-            I want 
-
-            <ul>
-            <li id="temp"></li>
-            <li id="graphic"></li>
-            <li id="wind"></li>
-            <li id="humidity"></li>
-            <li id="UV index"></li>
-            </ul>
-            */
 
             // For next 5 days
             const forecast = document.querySelector('#five-day-forecast');
@@ -215,11 +219,149 @@ searchForm.addEventListener('submit', function (event) {
 
             day2Card.appendChild(ul2);
 
+            // Day + 3
+            const day3Card = document.createElement('div');
+            day3Card.classList.add('card')
+            day3Card.classList.add('card-body')
+            day3Card.classList.add('VWcard')
+            const ul3 = document.createElement('ul')
+            ul3.classList.add('card-ul')
+
+            let dayThr = new Date();
+            const ddThr = String(dayThr.getDate() + 3).padStart(2, '0');
+            const mmThr = String(dayThr.getMonth() + 1).padStart(2, '0');
+            const yyyyThr = dayThr.getFullYear();
+            dayThr = `${ddThr}/${mmThr}/${yyyyThr}`;
+
+            const date3Li = document.createElement('p');
+            date3Li.textContent = `${dayThr}`;
+            ul3.appendChild(date3Li);
+
+            // Graphic
+            const iconThr = iconCodeToPic(weatherData.daily[2].weather[0].icon);
+            const imgThr = document.createElement('img')
+            imgThr.src = iconThr;
+            ul3.appendChild(imgThr)
+
+            // Temperature
+            const tempThr = kelvinToCelcius(weatherData.daily[2].temp.day);
+            const tempThrLi = document.createElement('li')
+            tempThrLi.textContent = `Temp ${tempThr}℃`
+            ul3.appendChild(tempThrLi)
+
+            // Wind
+            const windThr = weatherData.daily[2].wind_speed;
+            const windThrLi = document.createElement('li');
+            windThrLi.textContent = `Wind ${windThr}km/h`;
+            ul3.appendChild(windThrLi);
+
+            // Humidity
+            const humidThr = weatherData.daily[2].humidity;
+            const humidThrLi = document.createElement('li');
+            humidThrLi.textContent = `Humidity ${humidThr} %`;
+            ul3.appendChild(humidThrLi);
+
+            day3Card.appendChild(ul3);
+
+            // Day + 4
+            const day4Card = document.createElement('div');
+            day4Card.classList.add('card')
+            day4Card.classList.add('card-body')
+            day4Card.classList.add('VWcard')
+            const ul4 = document.createElement('ul')
+            ul4.classList.add('card-ul')
+
+            let dayFor = new Date();
+            const ddFor = String(dayFor.getDate() + 4).padStart(2, '0');
+            const mmFor = String(dayFor.getMonth() + 1).padStart(2, '0');
+            const yyyyFor = dayFor.getFullYear();
+            dayFor = `${ddFor}/${mmFor}/${yyyyFor}`;
+
+            const date4Li = document.createElement('p');
+            date4Li.textContent = `${dayFor}`;
+            ul4.appendChild(date4Li);
+
+            // Graphic
+            const iconFor = iconCodeToPic(weatherData.daily[3].weather[0].icon);
+            const imgFor = document.createElement('img')
+            imgFor.src = iconFor;
+            ul4.appendChild(imgFor)
+
+            // Temperature
+            const tempFor = kelvinToCelcius(weatherData.daily[3].temp.day);
+            const tempForLi = document.createElement('li')
+            tempForLi.textContent = `Temp ${tempFor}℃`
+            ul4.appendChild(tempForLi)
+
+            // Wind
+            const windFor = weatherData.daily[3].wind_speed;
+            const windForLi = document.createElement('li');
+            windForLi.textContent = `Wind ${windFor}km/h`;
+            ul4.appendChild(windForLi);
+
+            // Humidity
+            const humidFor = weatherData.daily[3].humidity;
+            const humidForLi = document.createElement('li');
+            humidForLi.textContent = `Humidity ${humidFor} %`;
+            ul4.appendChild(humidForLi);
+
+            day4Card.appendChild(ul4);
+
+            // Day + 5
+            const day5Card = document.createElement('div');
+            day5Card.classList.add('card')
+            day5Card.classList.add('card-body')
+            day5Card.classList.add('VWcard')
+            const ul5 = document.createElement('ul')
+            ul5.classList.add('card-ul')
+
+            let dayFiv = new Date();
+            const ddFiv = String(dayFiv.getDate() + 5).padStart(2, '0');
+            const mmFiv = String(dayFiv.getMonth() + 1).padStart(2, '0');
+            const yyyyFiv = dayFiv.getFullYear();
+            dayFiv = `${ddFiv}/${mmFiv}/${yyyyFiv}`;
+
+            const date5Li = document.createElement('p');
+            date5Li.textContent = `${dayFiv}`;
+            ul5.appendChild(date5Li);
+
+            // Graphic
+            const iconFiv = iconCodeToPic(weatherData.daily[4].weather[0].icon);
+            const imgFiv = document.createElement('img')
+            imgFiv.src = iconFiv;
+            ul5.appendChild(imgFiv)
+
+            // Temperature
+            const tempFiv = kelvinToCelcius(weatherData.daily[4].temp.day);
+            const tempFivLi = document.createElement('li')
+            tempFivLi.textContent = `Temp ${tempFiv}℃`
+            ul5.appendChild(tempFivLi)
+
+            // Wind
+            const windFiv = weatherData.daily[4].wind_speed;
+            const windFivLi = document.createElement('li');
+            windFivLi.textContent = `Wind ${windFiv}km/h`;
+            ul5.appendChild(windFivLi);
+
+            // Humidity
+            const humidFiv = weatherData.daily[4].humidity;
+            const humidFivLi = document.createElement('li');
+            humidFivLi.textContent = `Humidity ${humidFiv} %`;
+            ul5.appendChild(humidFivLi);
+
+            day5Card.appendChild(ul5);
+
 
             forecast.appendChild(day1Card);
             forecast.appendChild(day2Card);
+            forecast.appendChild(day3Card);
+            forecast.appendChild(day4Card);
+            forecast.appendChild(day5Card);
 
-            return todayWeatherCard;
+            // Save data to local storage
+            itemsToLocalStorage(weatherData, userInput);
+
+            return;
         })
 
     // Show the cards
@@ -228,3 +370,5 @@ searchForm.addEventListener('submit', function (event) {
         card.classList.remove('hide');
     })
 })
+
+printLocalStorageBtns();

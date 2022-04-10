@@ -33,6 +33,19 @@ body{
     border: #accfbf;
     color: var(--darkGreen);
 }
+.btn-cursor:active{
+    cursor: crosshair;
+    background-color:#accfbf;
+    border: #accfbf;
+    color: var(--darkGreen);
+}
+.btn-cursor:onclick{
+    cursor: crosshair;
+    background-color:#accfbf;
+    border: #accfbf;
+    color: var(--darkGreen);
+}
+
 .VW{
     min-width:60vw;
 }
