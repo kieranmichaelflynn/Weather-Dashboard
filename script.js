@@ -28,7 +28,7 @@ function getWeather(city) {
         });
 }
 
-const searchForm = document.getElementById('form-search')
+const searchForm = document.getElementById('form-search');
 
 function kelvinToCelcius(kelvin) {
     const temp = kelvin - 273.15
@@ -48,28 +48,43 @@ function clearCard(todayWeatherCard) {
     return todayWeatherCard.innerHTML = " ";
 }
 
-const itemLocal = JSON.parse(localStorage.getItem('perth'));
-console.log(itemLocal);
-    
-// console.log(localItems)
-// const localObject = JSON.parse(localItems);
-// console.log(localObject);
 
-function printLocalStorageBtns() {
-    // const localTarget = document.querySelector('#local-target');
+function printExistingLocalStorageBtns() {
+    const localTarget = document.querySelector('#local-target');
+    clearCard(localTarget);
 
-    // for (let index = 0; index < localObject.length; index++) {
-    //     const localBtns = document.createElement('button').textContent(localItems);
-    //     localTarget.appendChild(localBtns);
-        
-    // };
+    const itemLocal = localStorage;
+
+    for (let index = 0; index < itemLocal.length; index++) {
+        const localBtns = document.createElement('button');
+        localBtns.classList.add('btn')
+        localBtns.classList.add('btn-seconday')
+        localBtns.classList.add('btn-two')
+        const name = capitalizeFirstLetter(itemLocal.key(index));
+        localBtns.innerHTML = name;
+        localBtns.setAttribute('id', name)
+        localTarget.appendChild(localBtns);
+        localBtns.addEventListener('click', function () {
+            const btnInput = name;
+            console.log(btnInput)
+            const userInputForm = document.getElementById('input-city');
+            userInputForm.value = btnInput;
+            userInputForm.submit();
+            // document.getElementById("input-city").submit(btnInput);
+            // document.forms["userInputForm"].submit();
+
+
+        });
+
+    }
+
 }
+
 function itemsToLocalStorage(weatherData, userInput) {
-    const localData = JSON.stringify(weatherData);
-    const localInput = JSON.stringify(userInput);
-    window.localStorage.setItem(localInput, localData);
+    const localData = JSON.stringify(weatherData)
+    window.localStorage.setItem(userInput, localData);
+    printExistingLocalStorageBtns();
 }
-
 
 
 searchForm.addEventListener('submit', function (event) {
@@ -77,6 +92,14 @@ searchForm.addEventListener('submit', function (event) {
 
     // When the user enters a city name
     // Call weather API to retrieve weather data by city name
+
+    const userInputForm = document.getElementById('input-city');
+
+    if (userInputForm.value == " ") {
+        alert("Please enter a City")
+        return;
+    }
+
 
     const userInput = document.getElementById('input-city').value;
     document.getElementById('today-city').textContent = `${capitalizeFirstLetter(userInput)} Weather`;
@@ -363,6 +386,7 @@ searchForm.addEventListener('submit', function (event) {
 
             return;
         })
+    userInputForm.value = " ";
 
     // Show the cards
     const cards = document.querySelectorAll('.hide')
@@ -371,4 +395,6 @@ searchForm.addEventListener('submit', function (event) {
     })
 })
 
-printLocalStorageBtns();
+
+
+printExistingLocalStorageBtns();

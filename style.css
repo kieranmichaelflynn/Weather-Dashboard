@@ -45,6 +45,11 @@ body{
     border: #accfbf;
     color: var(--darkGreen);
 }
+.btn-two{
+    margin: 5px;
+    background-color: #accfbf;
+}
+
 
 .VW{
     min-width:60vw;
