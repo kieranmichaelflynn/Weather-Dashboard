@@ -1,68 +1,100 @@
-:root{
+:root {
     --background-color: #d5ede7;
-    --darkGreen:rgb(12, 37, 17);
-    --gradient: linear-gradient(180deg, rgb(12, 37, 17),rgb(82, 141, 128),#d5ede7);
+    --darkGreen: rgb(12, 37, 17);
+    --gradient: linear-gradient(180deg, rgb(12, 37, 17), rgb(82, 141, 128), #d5ede7);
 }
-h1{
-    color:rgb(218, 228, 222);
+
+h1 {
+    color: rgb(218, 228, 222);
 }
-.jumbotron{
+
+.jumbotron {
     background: var(--gradient);
 }
+
 .hide {
     display: none;
 }
-body{
+
+body {
     background-color: var(--background-color);
     color: var(--darkGreen);
 }
-.card{
+
+.card {
     background-color: #accfbf;
     color: rgb(44, 42, 37);
 }
-.btn-cursor{
+
+.btn-cursor {
     cursor: crosshair;
-    background-color:var(--darkGreen);
+    background-color: var(--darkGreen);
     border: var(--darkGreen);
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.btn-cursor:hover{
+
+.btn-cursor:hover {
     cursor: crosshair;
-    background-color:#accfbf;
+    background-color: #accfbf;
     border: #accfbf;
     color: var(--darkGreen);
 }
-.btn-cursor:active{
+
+.btn-cursor:active {
     cursor: crosshair;
-    background-color:#accfbf;
+    background-color: #accfbf;
     border: #accfbf;
     color: var(--darkGreen);
 }
-.btn-cursor:onclick{
+
+.btn-cursor:onclick {
     cursor: crosshair;
-    background-color:#accfbf;
+    background-color: #accfbf;
     border: #accfbf;
     color: var(--darkGreen);
 }
-.btn-two{
+
+.btn-two {
     margin: 5px;
     background-color: #accfbf;
 }
 
 
-.VW{
-    min-width:60vw;
+.VW {
+    min-width: 60vw;
 }
-.VWcard{
+
+.VWcard {
     min-width: 12vw;
     max-width: 12vw;
     padding: 10px 10px 4px 4px;
     justify-content: center;
 }
-.card-ul{
+
+.card-ul {
     padding-left: 10px;
     margin-left: 0px;
     list-style-position: inside;
     list-style: none;
+}
+
+.extreme {
+    background-color: rgb(255, 88, 88);
+    max-width: 15vw;
+}
+
+.hot {
+    background-color: rgb(255, 106, 0);
+    max-width: 15vw;
+}
+
+.moderate {
+    background-color: rgb(255, 238, 0);
+    max-width: 15vw;
+}
+
+.low {
+    background-color: rgb(0, 255, 0);
+    max-width: 8vw;
 }

@@ -40,8 +40,9 @@ function iconCodeToPic(iconCode) {
     return `http://openweathermap.org/img/wn/${iconCode}@2x.png`
 }
 
-function capitalizeFirstLetter(userInput) {
-    return userInput.charAt(0).toUpperCase() + userInput.slice(1);
+
+function capitalizeFirstLetter(Input) {
+    return Input.charAt(0).toUpperCase() + Input.slice(1);
 }
 
 function clearCard(todayWeatherCard) {
@@ -66,10 +67,10 @@ function printExistingLocalStorageBtns() {
         localTarget.appendChild(localBtns);
         localBtns.addEventListener('click', function () {
             const btnInput = name;
-            console.log(btnInput)
             const userInputForm = document.getElementById('input-city');
             userInputForm.value = btnInput;
-            userInputForm.submit();
+            weatherForecast(btnInput);
+            // userInputForm.submit();
             // document.getElementById("input-city").submit(btnInput);
             // document.forms["userInputForm"].submit();
 
@@ -87,8 +88,10 @@ function itemsToLocalStorage(weatherData, userInput) {
 }
 
 
-searchForm.addEventListener('submit', function (event) {
-    event.preventDefault();
+
+
+function weatherForecast(btninput) {
+    // event.preventDefault();
 
     // When the user enters a city name
     // Call weather API to retrieve weather data by city name
@@ -100,9 +103,19 @@ searchForm.addEventListener('submit', function (event) {
         return;
     }
 
+    console.log(btninput);
 
-    const userInput = document.getElementById('input-city').value;
-    document.getElementById('today-city').textContent = `${capitalizeFirstLetter(userInput)} Weather`;
+    let userInput = " "
+
+    if (btninput !== undefined) {
+        userInput = btninput;
+        userInput = capitalizeFirstLetter(userInput);
+        // document.getElementById('today-city').textContent = `${userInput} Weather`;
+    } else {
+        userInput = document.getElementById('input-city').value;
+        userInput = capitalizeFirstLetter(userInput);
+    }
+    document.getElementById('today-city').textContent = `${userInput} Weather`;
 
     getWeather(userInput)
         .then(function (weatherData) {
@@ -142,10 +155,18 @@ searchForm.addEventListener('submit', function (event) {
             // UV index
             const UVindex = weatherData.daily[0].uvi;
             const UVindexLi = document.createElement('li');
-            if (UVindex >= 6) {
+            if (UVindex >= 9) {
+                UVindexLi.textContent = `UV Index is ${UVindex} Use sun protection!!`
+                UVindexLi.classList.add('extreme')
+            } else if (UVindex >= 6) {
                 UVindexLi.textContent = `UV Index is ${UVindex} Use sun protection!`
+                UVindexLi.classList.add('hot')
+            } else if (UVindex >= 3) {
+                UVindexLi.textContent = `UV Index is ${UVindex} `
+                UVindexLi.classList.add('moderate')
             } else {
-                UVindexLi.textContent = `UV Index is ${UVindex}`
+                UVindexLi.textContent = `UV Index is ${UVindex} `
+                UVindexLi.classList.add('low')
             }
             todayWeatherCard.appendChild(UVindexLi)
 
@@ -383,8 +404,9 @@ searchForm.addEventListener('submit', function (event) {
 
             // Save data to local storage
             itemsToLocalStorage(weatherData, userInput);
-
             return;
+
+
         })
     userInputForm.value = " ";
 
@@ -393,8 +415,12 @@ searchForm.addEventListener('submit', function (event) {
     cards.forEach(card => {
         card.classList.remove('hide');
     })
-})
+    // printExistingLocalStorageBtns();
+}
 
-
+searchForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    weatherForecast();
+});
 
 printExistingLocalStorageBtns();
